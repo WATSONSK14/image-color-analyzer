@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ana Sayfa - Resim Yükleme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Resim Yükleme</h1>
+
+    <!-- Yükleme formu -->
+    <form action="{{ url_for('home') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Yükle</button>
+    </form>
+
+    <br>
+
+    <!-- Flash mesajları -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+{% if filename %}
+    <img src="{{ filename }}" alt="Yüklenen Resim" width="300">
+    
+    {% if color_stats %}
+    <div class="color-stats-container">
+        <h3>Renk İstatistikleri</h3>
+        <div class="color-stats-grid">
+            {% for hex_code, percentage in color_stats %}
+            <div class="color-card" data-hex="{{ hex_code }}" onclick="copyHex('{{ hex_code }}', this)">
+                <div class="color-preview" style="background-color: {{ hex_code }};"></div>
+                <div class="color-info">
+                    <span class="color-hex">{{ hex_code }}</span>
+                    <span class="color-percentage">{{ "%.2f"|format(percentage) }}%</span>
+                </div>
+                <div class="copy-tooltip">Kopyalamak için tıklayın</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endif %}
+
+<script>
+function copyHex(hex, element) {
+    navigator.clipboard.writeText(hex).then(function() {
+        const tooltip = element.querySelector('.copy-tooltip');
+        const originalText = tooltip.textContent;
+        tooltip.textContent = 'Kopyalandı! ✓';
+        tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateY(0)';
+        
+        setTimeout(function() {
+            tooltip.textContent = originalText;
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(4px)';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('Kopyalama hatası:', err);
+    });
+}
+</script>
+</body>
+</html>

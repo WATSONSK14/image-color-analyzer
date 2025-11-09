@@ -1,0 +1,273 @@
+/* Genel reset ve temel değişkenler */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0f172a;           /* slate-900 */
+  --panel: #0b1226;        /* koyu panel */
+  --muted: #94a3b8;        /* slate-400 */
+  --text: #e2e8f0;         /* slate-200 */
+  --primary: #7c3aed;      /* violet-600 */
+  --primary-600: #6d28d9;  /* hover */
+  --ring: #a78bfa;         /* odak halkası */
+  --ok: #22c55e;           /* yeşil */
+  --warn: #f59e0b;         /* amber */
+  --danger: #ef4444;       /* kırmızı */
+  --border: rgba(148, 163, 184, 0.2);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(124, 58, 237, 0.15);
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(1200px 600px at 70% -10%, rgba(124, 58, 237, 0.18), transparent 60%),
+              radial-gradient(900px 500px at -10% 20%, rgba(59, 130, 246, 0.18), transparent 60%),
+              var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 40px 16px;
+}
+
+body > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin: 0 auto 18px auto;
+  max-width: 560px;
+  background: linear-gradient(90deg, #e9d5ff, #bfdbfe, #e2e8f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Kart benzeri form alanı */
+form {
+  width: 100%;
+  max-width: 560px;
+  background-color: rgba(11, 18, 38, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Dosya input'u daha modern görünsün */
+input[type="file"] {
+  grid-column: 1 / span 1;
+  width: 100%;
+  color: var(--muted);
+}
+
+/* WebKit tabanlı tarayıcılarda input stilini iyileştir */
+input[type="file"]::-webkit-file-upload-button {
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.18), rgba(124, 58, 237, 0.08));
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(167, 139, 250, 0.6);
+}
+
+/* Gönder butonu */
+button[type="submit"] {
+  grid-column: 2 / span 1;
+  appearance: none;
+  border: 0;
+  background: linear-gradient(180deg, var(--primary), var(--primary-600));
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-radius: 12px;
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:focus-visible, input[type="file"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.35);
+}
+
+/* Araya biraz nefes */
+br { display: none; }
+
+/* Flash mesajları */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px auto 0 auto;
+  max-width: 560px;
+}
+
+li {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #bbf7d0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* Yüklenen görsel alanı */
+h3 {
+  text-align: center;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 24px 0 12px 0;
+}
+
+img {
+  display: block;
+  max-width: min(560px, 92vw);
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  margin: 0 auto;
+}
+
+/* Renk İstatistikleri Bölümü */
+.color-stats-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 32px auto 0 auto;
+  padding: 0 16px;
+}
+
+.color-stats-container h3 {
+  text-align: center;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 20px 0;
+  font-size: 20px;
+}
+
+.color-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.color-card {
+  background-color: rgba(11, 18, 38, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.color-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(124, 58, 237, 0.2);
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+.color-preview {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid var(--border);
+}
+
+.color-info {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.color-hex {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.color-percentage {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.copy-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background-color: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  margin-bottom: 8px;
+}
+
+.color-card:hover .copy-tooltip {
+  opacity: 0.9;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Küçük ekran iyileştirmeleri */
+@media (max-width: 520px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+  button[type="submit"] {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+  
+  .color-stats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  
+  .color-preview {
+    height: 70px;
+  }
+}
+
+
